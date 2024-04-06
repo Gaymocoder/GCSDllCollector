@@ -1,15 +1,18 @@
 #ifndef __DLL_WALKER_H__
 #define __DLL_WALKER_H__
 
-#include "PEParser.h"
+#include "GCSDllCollector/PEParser.h"
 
 #include <map>
+#include <vector>
 
 namespace FS = std::filesystem;
-typedef PEDeps std::map<std::string, GCS::PEFile*>;
+
 
 class PEFileDeps
 {
+    typedef std::map<std::string, PEFileDeps*> PEDeps;
+
     private:
         FS::path path;
         PEParser* parser;
@@ -19,9 +22,11 @@ class PEFileDeps
 
     public:
         template <typename T>
-        GCS::PEFileDeps(T path);
+        PEFileDeps(T path);
 
-        std::map <std::string, GCS::PEFile*> getImportedDlls();
-}
+        PEDeps getImportedDlls();
+};
 
-PEDeps& operator[](PEDeps& peTree, std::string key);
+typedef std::map<std::string, PEFileDeps*> PEDeps;
+
+#endif

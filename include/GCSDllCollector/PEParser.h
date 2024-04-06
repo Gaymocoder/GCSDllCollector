@@ -10,28 +10,30 @@ namespace FS = std::filesystem;
 class PEParser
 {
     private:
-        FS::path path;
+        FS::path peFilePath;
 
         HANDLE peFile;
         DWORD peFileSize;
         LPVOID peFileData;
 
-        DWORD getFileSize();
-        LPVOID readFileData();
+        bool getFileSize();
+        bool readFileData();
 
     public:
         PEParser();
 
-        template<typename T>
+        template <typename T>
         PEParser(T path);
 
-        template<typename T>
-        void open(T path);
+        template <typename T>
+        bool open(T path);
 
         PIMAGE_DOS_HEADER getDosHeader();
         PIMAGE_NT_HEADERS getNTHeaders();
         PIMAGE_SECTION_HEADER getSectionHeaders();
         PIMAGE_IMPORT_DESCRIPTOR getImportDescriptor();
 
-        void close();
-}
+        void close(const char* message);
+};
+
+#endif

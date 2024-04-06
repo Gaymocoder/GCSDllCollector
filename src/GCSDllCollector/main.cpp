@@ -1,4 +1,4 @@
-#include "GCSDllCollector/DllParser.h"
+#include "GCSDllCollector/DllWalker.h"
 
 #include <iostream>
 
