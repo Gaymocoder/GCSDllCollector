@@ -1,7 +1,7 @@
 #ifndef __DLL_WALKER_H__
 #define __DLL_WALKER_H__
 
-#include "GCSDllCollector/PEParser.h"
+#include "GCSPEParser/PEParser.h"
 
 #include <map>
 #include <vector>

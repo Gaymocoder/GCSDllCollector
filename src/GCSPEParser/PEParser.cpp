@@ -1,4 +1,4 @@
-#include "GCSDllCollector/PEParser.h"
+#include "GCSPEParser/PEParser.h"
 
 bool PEParser::getFileSize()
 {
