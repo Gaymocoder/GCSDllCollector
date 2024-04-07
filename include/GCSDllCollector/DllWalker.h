@@ -9,23 +9,27 @@
 namespace FS = std::filesystem;
 
 
-class PEFileDeps
+class PEFileDeps : private PEParser
 {
     typedef std::map<std::string, PEFileDeps*> PEDeps;
 
     private:
-        FS::path path;
-        PEParser* parser;
-
-        std::vector <std::string> getImportedDllNames();
         std::vector <FS::path> getImportedDllPaths();
 
     public:
         template <typename T>
-        PEFileDeps(T path);
+        PEFileDeps(T value);
 
+        std::vector <std::string> getImportedDllNames();
         PEDeps getImportedDlls();
+
+        FS::path Path();
+
+        virtual ~PEFileDeps();
 };
+
+template <typename T>
+PEFileDeps::PEFileDeps(T value) : PEParser(value) {}
 
 typedef std::map<std::string, PEFileDeps*> PEDeps;
 
